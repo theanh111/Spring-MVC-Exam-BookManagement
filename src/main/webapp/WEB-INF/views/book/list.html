@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Books</title>
+</head>
+<body>
+<center>
+    <a href="/">Home</a>
+    <br>
+    <a href="/createNewBook">Create New Book</a>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <h1>Books</h1>
+    <form>
+        <p>Search Book: </p>
+        <input type="text" name="searchBook">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <th:block th:each="book : ${books}">
+            <tr>
+                <td th:text="${book.getId()}"></td>
+                <td th:text="${book.getName()}"></td>
+                <td th:text="${book.getAuthor()}"></td>
+                <td th:text="${book.getCategory().getName()}"></td>
+                <td><a th:href="@{/editBook/__${book.getId()}__}">EDIT</a></td>
+                <td><a th:href="@{/deleteBook/__${book.getId()}__}">DELETE</a></td>
+            </tr>
+        </th:block>
+    </table>
+</center>
+</body>
+</html>

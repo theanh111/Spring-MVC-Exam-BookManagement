@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Categories</title>
+</head>
+<body>
+<center>
+    <a href="/">Home</a>
+    <br>
+    <a href="/createNewBook">Create New Category</a>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <h1>Categories</h1>
+    <form>
+        <p>Search Category: </p>
+        <input type="text" name="searchCategory">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <th:block th:each="category : ${categories}">
+            <tr>
+                <td th:text="${category.getId()}"></td>
+                <td th:text="${category.getName()}"></td>
+                <td><a th:href="@{/editCategory/__${category.getId()}__}">EDIT</a></td>
+                <td><a th:href="@{/deleteCategory/__${category.getId()}__}">DELETE</a></td>
+            </tr>
+        </th:block>
+    </table>
+</center>
+</body>
+</html>
